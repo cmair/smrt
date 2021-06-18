@@ -62,6 +62,8 @@ class Network:
 
             # Receiving socket
             self.rs.bind((Network.BROADCAST_ADDR, Network.UDP_RECEIVE_FROM_PORT))
+            if interface:
+                self.rs.setsockopt(socket.SOL_SOCKET, socket.SO_BINDTODEVICE, interface.encode())
             self.rs.settimeout(10)
 
     def get_interface(self, interface=None):
